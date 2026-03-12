@@ -134,9 +134,6 @@ const addBookBtn = document.getElementById("addBookBtn");
 const bookDialogRef= document.getElementById("bookDialog");
 const cancelBtn = document.getElementById("cancelBtn");
 const bookForm = document.getElementById("bookForm");
-const errorAuthorSpan = document.querySelector("errorAuthor");
-const errorTitleSpan = document.querySelector("errorTitle");
-const errorPagesSpan = document.querySelector('errorPages');
 
 addBookBtn.addEventListener('click', () => { 
 
@@ -150,8 +147,15 @@ cancelBtn.addEventListener('click', () => {
 });
 
 bookForm.addEventListener('submit', (event) => {
+
     event.preventDefault(); /* prevent page reload */
-    let readRef = document.getElementById('readInput').checked;
+    const authorVal = document.getElementById('author').value;
+    const titleVal = document.getElementById('title').value;
+    const pagesVal = document.getElementById('pages').value;
+    const readVal = document.getElementById('readInput').checked;
+    if (!validateForm()) {
+        return
+    }
 
     addBookToLibrary(authorVal, titleVal, pagesVal, readVal);
     bookDialogRef.close();
@@ -165,6 +169,13 @@ bookForm.addEventListener('submit', (event) => {
 
 
 function validateForm() {
+    const errorAuthorSpan = document.querySelector(".errorAuthor");
+    const errorTitleSpan = document.querySelector(".errorTitle");
+    const errorPagesSpan = document.querySelector(".errorPages");
+    const titleRef = document.getElementById("title");
+    const pagesRef =  document.getElementById("pages");
+    const authorRef = document.getElementById("author"); 
+
 
     const inputConfig = [
         {
@@ -186,14 +197,18 @@ function validateForm() {
         }, 
     ];
 
+    let validState = true;
+
     inputConfig.forEach((formInput) => {
         if (!formInput.input.checkValidity()) {
-            formInput.errorSpan.textContent = config.errorMessage;
-            return
+            formInput.errorSpan.textContent = formInput.errorMessage;
+            validState = false;
         } else {
-            errorAuthorSpan.textContent = "";
+            formInput.errorSpan.textContent = "";
         }
     });
+
+    return validState;
 
 
 
