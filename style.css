@@ -139,3 +139,10 @@ dialog::backdrop{
     text-align: center;
     grid-column: 1 / -1;
 }
+
+.errorAuthor,
+.errorTitle,
+.errorPages {
+color: red;
+font-size: 14px;
+}
