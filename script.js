@@ -134,6 +134,9 @@ const addBookBtn = document.getElementById("addBookBtn");
 const bookDialogRef= document.getElementById("bookDialog");
 const cancelBtn = document.getElementById("cancelBtn");
 const bookForm = document.getElementById("bookForm");
+const errorAuthorSpan = document.querySelector("errorAuthor");
+const errorTitleSpan = document.querySelector("errorTitle");
+const errorPagesSpan = document.querySelector('errorPages');
 
 addBookBtn.addEventListener('click', () => { 
 
